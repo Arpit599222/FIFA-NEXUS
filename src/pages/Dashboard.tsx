@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useThemeStore, type TeamTheme } from '../stores/themeStore';
 import { useAuthStore } from '../stores/authStore';
 import { notifications, teams } from '../mock-data';
-import { Bell, Map, Mic, ShieldAlert, Sparkles, Navigation, LogOut, User, Trophy, Shield } from 'lucide-react';
+import { Bell, Map, Mic, ShieldAlert, Sparkles, Navigation, LogOut, User, Trophy, Shield, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ProfileDropdown } from '../components/ProfileDropdown';
 import { toast } from 'sonner';
@@ -183,7 +183,7 @@ export const Dashboard = () => {
 
               {/* Quick Actions */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <QuickAction to="/concierge" icon={Mic} title="AI Concierge" desc="Ask anything" />
+                <QuickAction to="/ai-playground" icon={Bot} title="API Playground" desc="Test NVIDIA NIM" />
                 <QuickAction to="/stadium" icon={Map} title="Digital Twin" desc="3D Stadium" />
                 <QuickAction to="/navigation" icon={Navigation} title="Navigation" desc="Smart routing" />
                 <QuickAction to="/safety" icon={ShieldAlert} title="Safety Copilot" desc="Emergency" />
