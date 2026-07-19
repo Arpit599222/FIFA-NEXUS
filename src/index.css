@@ -145,5 +145,6 @@
 .theme-text-gradient {
   background: linear-gradient(to right, hsl(var(--theme-primary)), hsl(var(--theme-secondary)));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
