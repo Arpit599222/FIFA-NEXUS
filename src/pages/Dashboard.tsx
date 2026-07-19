@@ -168,7 +168,7 @@ export const Dashboard = () => {
                       <span className="px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-primary/20 text-[hsl(var(--theme-primary))] mb-4 inline-block">
                         Live Match
                       </span>
-                      <h2 className="text-3xl font-bold mb-2">Argentina vs USA</h2>
+                      <h2 className="text-3xl font-bold mb-2">Spain vs Argentina</h2>
                       <p className="text-muted-foreground flex items-center gap-2">
                         <Map className="w-4 h-4" /> MetLife Stadium
                       </p>
@@ -182,9 +182,8 @@ export const Dashboard = () => {
               )}
 
               {/* Quick Actions */}
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <QuickAction to="/concierge" icon={Mic} title="AI Concierge" desc="Ask anything" />
-                <QuickAction to="/ai-playground" icon={Bot} title="API Playground" desc="Test NVIDIA NIM" />
                 <QuickAction to="/stadium" icon={Map} title="Digital Twin" desc="3D Stadium" />
                 <QuickAction to="/navigation" icon={Navigation} title="Navigation" desc="Smart routing" />
                 <QuickAction to="/safety" icon={ShieldAlert} title="Safety Copilot" desc="Emergency" />
