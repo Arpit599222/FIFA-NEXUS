@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* FIFA Default Theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+    
+    /* Theme Engine Variables */
+    --theme-primary: 0 0% 9%;
+    --theme-secondary: 0 0% 96.1%;
+    --theme-accent: 0 0% 80%;
+    --theme-gradient-start: 0 0% 90%;
+    --theme-gradient-end: 0 0% 100%;
+    --theme-glass: rgba(255, 255, 255, 0.7);
+    --theme-glass-border: rgba(255, 255, 255, 0.3);
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    
+    --theme-glass: rgba(0, 0, 0, 0.7);
+    --theme-glass-border: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Team Themes (Injecting colors based on class on html/body) */
+  .theme-argentina {
+    --theme-primary: 198 62% 55%; /* Sky Blue */
+    --theme-secondary: 44 98% 50%; /* Gold */
+    --theme-accent: 0 0% 100%; /* White */
+    --theme-gradient-start: 198 62% 65%;
+    --theme-gradient-end: 0 0% 100%;
+  }
+
+  .theme-brazil {
+    --theme-primary: 147 62% 35%; /* Green */
+    --theme-secondary: 52 100% 50%; /* Yellow */
+    --theme-accent: 220 100% 40%; /* Blue */
+    --theme-gradient-start: 147 62% 45%;
+    --theme-gradient-end: 52 100% 60%;
+  }
+
+  .theme-france {
+    --theme-primary: 213 100% 16%; /* Navy Blue */
+    --theme-secondary: 350 85% 42%; /* Red */
+    --theme-accent: 0 0% 100%; /* White */
+    --theme-gradient-start: 213 100% 26%;
+    --theme-gradient-end: 350 85% 52%;
+  }
+  
+  .theme-germany {
+    --theme-primary: 0 0% 0%; /* Black */
+    --theme-secondary: 0 85% 42%; /* Red */
+    --theme-accent: 44 98% 50%; /* Gold */
+    --theme-gradient-start: 0 0% 10%;
+    --theme-gradient-end: 0 85% 52%;
+  }
+
+  .theme-england {
+    --theme-primary: 0 0% 100%; /* White */
+    --theme-secondary: 350 85% 42%; /* Red */
+    --theme-accent: 213 100% 16%; /* Navy Blue */
+    --theme-gradient-start: 0 0% 90%;
+    --theme-gradient-end: 350 85% 52%;
+  }
+  
+  .theme-spain {
+    --theme-primary: 350 85% 42%; /* Red */
+    --theme-secondary: 44 98% 50%; /* Gold */
+    --theme-accent: 0 0% 100%; /* White */
+    --theme-gradient-start: 350 85% 52%;
+    --theme-gradient-end: 44 98% 60%;
+  }
+  
+  .theme-portugal {
+    --theme-primary: 147 62% 25%; /* Green */
+    --theme-secondary: 350 85% 42%; /* Red */
+    --theme-accent: 44 98% 50%; /* Gold */
+    --theme-gradient-start: 147 62% 35%;
+    --theme-gradient-end: 350 85% 52%;
+  }
+
+  /* Add other themes similarly... */
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+  }
+}
+
+.glass-panel {
+  @apply bg-[var(--theme-glass)] backdrop-blur-xl border border-[var(--theme-glass-border)] shadow-lg;
+}
+
+.theme-gradient-bg {
+  background: linear-gradient(135deg, hsl(var(--theme-gradient-start)), hsl(var(--theme-gradient-end)));
+}
+
+.theme-text-gradient {
+  background: linear-gradient(to right, hsl(var(--theme-primary)), hsl(var(--theme-secondary)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
