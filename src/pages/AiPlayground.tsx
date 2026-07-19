@@ -8,6 +8,81 @@ interface ChatMessage {
   text: string;
 }
 
+const renderInlineMarkdown = (text: string) => {
+  const parts: any[] = [];
+  let remaining = text;
+  let keyIdx = 0;
+
+  while (remaining.length > 0) {
+    const boldIndex = remaining.indexOf('**');
+    if (boldIndex !== -1) {
+      if (boldIndex > 0) {
+        parts.push(remaining.slice(0, boldIndex));
+      }
+      remaining = remaining.slice(boldIndex + 2);
+      const closeBoldIndex = remaining.indexOf('**');
+      if (closeBoldIndex !== -1) {
+        parts.push(
+          <strong key={keyIdx++} className="font-bold text-foreground">
+            {remaining.slice(0, closeBoldIndex)}
+          </strong>
+        );
+        remaining = remaining.slice(closeBoldIndex + 2);
+      } else {
+        parts.push('**' + remaining);
+        break;
+      }
+    } else {
+      parts.push(remaining);
+      break;
+    }
+  }
+
+  return parts;
+};
+
+const renderMarkdown = (text: string) => {
+  const lines = text.split('\n');
+  return lines.map((line, index) => {
+    // 1. Check for headers
+    if (line.startsWith('### ')) {
+      return <h3 key={index} className="text-base font-bold mt-3 mb-1 text-foreground">{renderInlineMarkdown(line.slice(4))}</h3>;
+    }
+    if (line.startsWith('## ')) {
+      return <h2 key={index} className="text-lg font-bold mt-4 mb-2 text-foreground">{renderInlineMarkdown(line.slice(3))}</h2>;
+    }
+    if (line.startsWith('# ')) {
+      return <h1 key={index} className="text-xl font-bold mt-5 mb-2 text-foreground">{renderInlineMarkdown(line.slice(2))}</h1>;
+    }
+
+    // 2. Check for bullet points
+    if (line.startsWith('* ') || line.startsWith('- ')) {
+      return (
+        <li key={index} className="ml-4 list-disc text-sm text-muted-foreground my-1">
+          {renderInlineMarkdown(line.slice(2))}
+        </li>
+      );
+    }
+
+    // 3. Check for table rows
+    if (line.startsWith('|') && line.endsWith('|')) {
+      const cells = line.split('|').map(c => c.trim()).filter(c => c !== '');
+      if (line.includes('---')) return null; // skip divider line
+      return (
+        <div key={index} className="flex border-b border-white/5 py-2 text-xs">
+          {cells.map((cell, idx) => (
+            <div key={idx} className="flex-1 font-medium">{renderInlineMarkdown(cell)}</div>
+          ))}
+        </div>
+      );
+    }
+
+    // 4. Default paragraph line
+    if (line.trim() === '') return <div key={index} className="h-2" />;
+    return <p key={index} className="text-sm leading-relaxed text-muted-foreground my-1">{renderInlineMarkdown(line)}</p>;
+  });
+};
+
 export function AiPlayground() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     { id: 'welcome', sender: 'ai', text: 'Hello! I am connected to the NVIDIA NIM API. Ask me anything to test the connection latency, status code, and token usage metrics.' }
@@ -213,12 +288,16 @@ export function AiPlayground() {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[80%] p-4 rounded-2xl text-sm leading-relaxed ${
+                  <div className={`max-w-[85%] p-5 rounded-2xl text-sm leading-relaxed ${
                     msg.sender === 'user'
                       ? 'bg-[#43A1D5] text-white rounded-tr-none'
                       : 'bg-white/5 border border-white/10 text-foreground rounded-tl-none'
                   }`}>
-                    {msg.text}
+                    {msg.sender === 'user' ? (
+                      <p>{msg.text}</p>
+                    ) : (
+                      <div className="space-y-1">{renderMarkdown(msg.text)}</div>
+                    )}
                   </div>
                 </motion.div>
               ))}
