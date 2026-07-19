@@ -90,11 +90,6 @@ export function AiPlayground() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  // Metrics & State
-  const [status, setStatus] = useState<number | null>(null);
-  const [timeMs, setTimeMs] = useState<number | null>(null);
-  const [tokens, setTokens] = useState<number | null>(null);
-  const [attempts, setAttempts] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [backendHealth, setBackendHealth] = useState<'checking' | 'connected' | 'error'>('checking');
   
@@ -132,13 +127,8 @@ export function AiPlayground() {
     setInput('');
     setIsLoading(true);
     setError(null);
-    setStatus(null);
-    setTimeMs(null);
-    setTokens(null);
     
     try {
-      const startTime = Date.now();
-      
       const res = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -155,7 +145,6 @@ export function AiPlayground() {
       });
       
       const data = await res.json();
-      setStatus(res.status);
       
       if (!res.ok) {
         const errorMsg = data.message || data.error || 'Unknown Error';
@@ -163,12 +152,8 @@ export function AiPlayground() {
         setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), sender: 'ai', text: `⚠️ Request Failed: ${errorMsg}` }]);
       } else {
         setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), sender: 'ai', text: data.content }]);
-        setTimeMs(data.timeMs || (Date.now() - startTime));
-        setTokens(data.usage?.total_tokens || null);
-        setAttempts(data.attempts || 1);
       }
     } catch (err: any) {
-      setStatus(504);
       const errorMsg = err.message || 'Network Error / Gateway Timeout';
       setError(errorMsg);
       setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), sender: 'ai', text: `⚠️ Network Error: ${errorMsg}` }]);
@@ -179,14 +164,11 @@ export function AiPlayground() {
 
   const clearChat = () => {
     setMessages([{ id: 'welcome', sender: 'ai', text: 'Chat cleared. Ask me anything to test the API.' }]);
-    setStatus(null);
-    setTimeMs(null);
-    setTokens(null);
     setError(null);
   };
 
   return (
-    <div className="pt-24 pb-32 px-6 max-w-4xl mx-auto space-y-6 flex flex-col h-[90vh]">
+    <div className="pt-24 pb-12 px-6 max-w-4xl mx-auto space-y-6 flex flex-col min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between shrink-0">
         <div className="flex items-center space-x-4">
@@ -219,7 +201,7 @@ export function AiPlayground() {
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 flex flex-col">
+      <div className="h-[600px] flex flex-col">
         {error && (
           <div className="p-4 mb-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-start space-x-2 text-xs text-red-400 shrink-0">
             <AlertTriangle className="w-4 h-4 shrink-0" />
