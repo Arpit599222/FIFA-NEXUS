@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthStore } from '../stores/authStore';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 
