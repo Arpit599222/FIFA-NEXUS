@@ -17,12 +17,10 @@ app.use(express.json());
 app.use('/api/ai', aiRoutes);
 app.use('/api/health', healthRoutes);
 
-// Start server (only if not running in a serverless environment)
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(port, () => {
-    console.log(`[server]: FIFA NEXUS AI backend is running at http://localhost:${port}`);
-  });
-}
+// Start server
+app.listen(port, () => {
+  console.log(`[server]: FIFA NEXUS AI backend is running at port ${port}`);
+});
 
 // Export for serverless deployment
 export default app;
