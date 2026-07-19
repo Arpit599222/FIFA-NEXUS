@@ -148,3 +148,28 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Accessibility Mode Overrides */
+body.accessibility-large-text {
+  font-size: 1.125rem;
+}
+body.accessibility-large-text p {
+  font-size: 1.1rem !important;
+}
+body.accessibility-large-text h1 {
+  font-size: 3.25rem !important;
+}
+body.accessibility-large-text h2 {
+  font-size: 2.25rem !important;
+}
+
+body.accessibility-high-contrast {
+  --background: 0 0% 0% !important;
+  --theme-glass: rgba(0, 0, 0, 0.98) !important;
+  --theme-glass-border: rgba(255, 255, 255, 0.4) !important;
+}
+body.accessibility-high-contrast * {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}
+

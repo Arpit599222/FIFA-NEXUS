@@ -3,16 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useThemeStore, type TeamTheme } from '../stores/themeStore';
 import { useAuthStore } from '../stores/authStore';
 import { notifications, teams } from '../mock-data';
-import { Bell, Map, Mic, ShieldAlert, Sparkles, Navigation, LogOut, User, Trophy, Shield, Bot } from 'lucide-react';
+import { Bell, Map, Mic, ShieldAlert, Sparkles, Navigation, LogOut, User, Trophy, Shield, Bot, Type, Eye, Volume2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ProfileDropdown } from '../components/ProfileDropdown';
 import { toast } from 'sonner';
+import { useAccessibilityStore } from '../stores/accessibilityStore';
 
 export const Dashboard = () => {
   const currentTheme = useThemeStore((state) => state.currentTheme);
   const setTheme = useThemeStore((state) => state.setTheme);
   const { user, profile, updateProfile, signOut } = useAuthStore();
   const [activeTab, setActiveTab] = useState<'experience' | 'profile'>('experience');
+
+  const { largeText, highContrast, voiceAssistance, toggleLargeText, toggleHighContrast, toggleVoiceAssistance } = useAccessibilityStore();
   
   // Profile edit states
   const [fullName, setFullName] = useState(profile?.full_name || '');
@@ -215,7 +218,7 @@ export const Dashboard = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="max-w-2xl mx-auto glass-panel p-8 rounded-3xl space-y-6 relative overflow-hidden"
+              className="max-w-4xl mx-auto glass-panel p-8 rounded-3xl space-y-6 relative overflow-hidden"
             >
               <div className="absolute inset-0 opacity-10 theme-gradient-bg -z-10" />
 
@@ -223,7 +226,7 @@ export const Dashboard = () => {
                 <User className="w-6 h-6 text-[#43A1D5]" /> My FIFA Profile
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Account Details Form */}
                 <form onSubmit={handleProfileUpdate} className="space-y-4">
                   <div className="space-y-1">
@@ -296,6 +299,54 @@ export const Dashboard = () => {
                       {updatingPassword ? 'Updating...' : 'Update Password'}
                     </button>
                   </form>
+                </div>
+
+                {/* Accessibility Settings Panel */}
+                <div className="space-y-4">
+                  <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                    ♿ Accessibility Settings
+                  </label>
+                  
+                  <div className="space-y-3 pt-2">
+                    <button
+                      onClick={toggleLargeText}
+                      className={`w-full flex items-center justify-between p-3 rounded-xl border transition ${
+                        largeText ? 'bg-primary/10 border-primary text-foreground' : 'border-white/10 hover:bg-white/5 text-muted-foreground'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Type className="w-4 h-4 text-[#43A1D5]" />
+                        <span className="text-xs font-bold">Large Text Mode</span>
+                      </div>
+                      <span className="text-xs">{largeText ? 'ON' : 'OFF'}</span>
+                    </button>
+
+                    <button
+                      onClick={toggleHighContrast}
+                      className={`w-full flex items-center justify-between p-3 rounded-xl border transition ${
+                        highContrast ? 'bg-primary/10 border-primary text-foreground' : 'border-white/10 hover:bg-white/5 text-muted-foreground'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Eye className="w-4 h-4 text-[#eab308]" />
+                        <span className="text-xs font-bold">High Contrast Mode</span>
+                      </div>
+                      <span className="text-xs">{highContrast ? 'ON' : 'OFF'}</span>
+                    </button>
+
+                    <button
+                      onClick={toggleVoiceAssistance}
+                      className={`w-full flex items-center justify-between p-3 rounded-xl border transition ${
+                        voiceAssistance ? 'bg-primary/10 border-primary text-foreground' : 'border-white/10 hover:bg-white/5 text-muted-foreground'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <Volume2 className="w-4 h-4 text-[#ef4444]" />
+                        <span className="text-xs font-bold">Voice Assistance</span>
+                      </div>
+                      <span className="text-xs">{voiceAssistance ? 'ON' : 'OFF'}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </motion.div>
