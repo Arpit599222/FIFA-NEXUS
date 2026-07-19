@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useThemeStore, type TeamTheme } from '../stores/themeStore';
 import { useAuthStore } from '../stores/authStore';
 import { notifications, teams } from '../mock-data';
-import { Bell, Map, Mic, ShieldAlert, Sparkles, Navigation, Bot, LogOut, User, Trophy, Shield } from 'lucide-react';
+import { Bell, Map, Mic, ShieldAlert, Sparkles, Navigation, LogOut, User, Trophy, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ProfileDropdown } from '../components/ProfileDropdown';
 import { toast } from 'sonner';

@@ -5,59 +5,59 @@
 @layer base {
   :root {
     /* FIFA Default Theme */
-    --background: 222 47% 95%;
-    --foreground: 222 47% 5%;
-    --card: 222 47% 98%;
-    --card-foreground: 222 47% 5%;
-    --popover: 222 47% 98%;
-    --popover-foreground: 222 47% 5%;
-    --primary: 222 80% 20%;
+    --background: 145 35% 95%;
+    --foreground: 145 45% 5%;
+    --card: 145 35% 98%;
+    --card-foreground: 145 45% 5%;
+    --popover: 145 35% 98%;
+    --popover-foreground: 145 45% 5%;
+    --primary: 145 45% 15%;
     --primary-foreground: 0 0% 100%;
     --secondary: 44 98% 50%;
-    --secondary-foreground: 222 47% 5%;
-    --muted: 222 47% 90%;
-    --muted-foreground: 222 47% 40%;
+    --secondary-foreground: 145 45% 5%;
+    --muted: 145 35% 90%;
+    --muted-foreground: 145 35% 40%;
     --accent: 44 98% 50%;
-    --accent-foreground: 222 47% 5%;
+    --accent-foreground: 145 45% 5%;
     --destructive: 350 85% 42%;
     --destructive-foreground: 0 0% 100%;
-    --border: 222 47% 80%;
-    --input: 222 47% 80%;
-    --ring: 222 80% 20%;
+    --border: 145 35% 80%;
+    --input: 145 35% 80%;
+    --ring: 145 45% 15%;
     --radius: 0.75rem;
     
     /* Theme Engine Variables */
-    --theme-primary: 222 80% 20%;
+    --theme-primary: 145 45% 15%;
     --theme-secondary: 44 98% 50%;
     --theme-accent: 0 0% 100%;
-    --theme-gradient-start: 222 80% 25%;
+    --theme-gradient-start: 145 45% 20%;
     --theme-gradient-end: 44 98% 60%;
     --theme-glass: rgba(255, 255, 255, 0.75);
-    --theme-glass-border: rgba(222, 47, 20%, 0.15);
+    --theme-glass-border: rgba(145, 45, 15%, 0.15);
   }
 
   .dark {
-    --background: 222 47% 6%;
+    --background: 145 35% 5%;
     --foreground: 0 0% 98%;
-    --card: 222 47% 9%;
+    --card: 145 35% 8%;
     --card-foreground: 0 0% 98%;
-    --popover: 222 47% 8%;
+    --popover: 145 35% 7%;
     --popover-foreground: 0 0% 98%;
     --primary: 44 98% 50%;
-    --primary-foreground: 222 47% 5%;
-    --secondary: 222 80% 15%;
+    --primary-foreground: 145 35% 4%;
+    --secondary: 145 45% 12%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 222 47% 12%;
-    --muted-foreground: 222 47% 65%;
+    --muted: 145 35% 10%;
+    --muted-foreground: 145 35% 65%;
     --accent: 44 98% 50%;
-    --accent-foreground: 222 47% 5%;
+    --accent-foreground: 145 35% 4%;
     --destructive: 350 85% 42%;
     --destructive-foreground: 0 0% 98%;
-    --border: 222 47% 15%;
-    --input: 222 47% 15%;
+    --border: 145 35% 13%;
+    --input: 145 35% 13%;
     --ring: 44 98% 50%;
     
-    --theme-glass: rgba(11, 19, 36, 0.75);
+    --theme-glass: rgba(10, 22, 14, 0.75);
     --theme-glass-border: rgba(255, 255, 255, 0.08);
   }
 
