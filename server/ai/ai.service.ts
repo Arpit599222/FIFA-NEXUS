@@ -8,7 +8,7 @@ let currentDir = '';
 try {
   currentDir = __dirname;
 } catch (e) {
-  currentDir = path.dirname(fileURLToPath(import.meta.url));
+  currentDir = path.dirname(fileURLToPath(new Function('return import.meta.url')()));
 }
 
 const NIM_API_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
