@@ -186,7 +186,7 @@ export const Dashboard = () => {
 
               {/* Quick Actions */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <QuickAction to="/ai-playground" icon={Bot} title="API Playground" desc="Test NVIDIA NIM" />
+                <QuickAction to="/ai-playground" icon={Bot} title="Nexus AI" desc="Tournament companion" />
                 <QuickAction to="/stadium" icon={Map} title="Digital Twin" desc="3D Stadium" />
                 <QuickAction to="/navigation" icon={Navigation} title="Navigation" desc="Smart routing" />
                 <QuickAction to="/safety" icon={ShieldAlert} title="Safety Copilot" desc="Emergency" />

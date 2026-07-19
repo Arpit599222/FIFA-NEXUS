@@ -186,7 +186,7 @@ export function AiPlayground() {
   };
 
   return (
-    <div className="pt-24 pb-32 px-6 max-w-6xl mx-auto space-y-6 flex flex-col h-[90vh]">
+    <div className="pt-24 pb-32 px-6 max-w-4xl mx-auto space-y-6 flex flex-col h-[90vh]">
       {/* Header */}
       <div className="flex items-center justify-between shrink-0">
         <div className="flex items-center space-x-4">
@@ -194,8 +194,8 @@ export function AiPlayground() {
             <Bot className="w-8 h-8 text-[#43A1D5]" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">API Playground</h1>
-            <p className="text-muted-foreground text-sm mt-0.5">Test & analyze responses from NVIDIA NIM</p>
+            <h1 className="text-3xl font-bold tracking-tight">Nexus AI</h1>
+            <p className="text-muted-foreground text-sm mt-0.5">Your official tournament assistant companion</p>
           </div>
         </div>
         
@@ -219,63 +219,16 @@ export function AiPlayground() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-1 min-h-0">
-        {/* Left Column: Diagnostics & Metrics Panel */}
-        <div className="lg:col-span-1 space-y-4 flex flex-col shrink-0">
-          <div className="p-6 bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl space-y-4">
-            <h3 className="font-bold text-sm text-foreground border-b border-white/5 pb-2">Telemetry</h3>
-            
-            <div className="space-y-4">
-              {/* Status Code */}
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-muted-foreground">HTTP Status</span>
-                <span className={`text-sm font-bold ${status === 200 ? 'text-green-500' : status ? 'text-red-500' : 'text-white/60'}`}>
-                  {status || 'N/A'}
-                </span>
-              </div>
-              
-              {/* Latency */}
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-muted-foreground">Latency</span>
-                <span className="text-sm font-bold text-white/80">
-                  {timeMs ? `${(timeMs / 1000).toFixed(2)}s` : 'N/A'}
-                </span>
-              </div>
-              
-              {/* Token Count */}
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-muted-foreground">Tokens</span>
-                <span className="text-sm font-bold text-white/80">
-                  {tokens || 'N/A'}
-                </span>
-              </div>
-
-              {/* Attempts */}
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-muted-foreground">Retries</span>
-                <span className="text-sm font-bold text-white/80">
-                  {attempts || '0'}
-                </span>
-              </div>
-            </div>
-            
-            <div className="pt-4 border-t border-white/10 text-[10px] text-white/40 space-y-1.5">
-              <p>• Model: nemotron-3-ultra-550b</p>
-              <p>• reasoning_budget: 16384</p>
-              <p>• temperature: 1.0</p>
-            </div>
+      <div className="flex-1 min-h-0 flex flex-col">
+        {error && (
+          <div className="p-4 mb-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-start space-x-2 text-xs text-red-400 shrink-0">
+            <AlertTriangle className="w-4 h-4 shrink-0" />
+            <span>{error}</span>
           </div>
+        )}
 
-          {error && (
-            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-start space-x-2 text-xs text-red-400">
-              <AlertTriangle className="w-4 h-4 shrink-0" />
-              <span>{error}</span>
-            </div>
-          )}
-        </div>
-
-        {/* Right Column: Chat layout */}
-        <div className="lg:col-span-3 glass-panel rounded-3xl flex flex-col min-h-0 relative overflow-hidden">
+        {/* Chat layout */}
+        <div className="flex-1 glass-panel rounded-3xl flex flex-col min-h-0 relative overflow-hidden">
           <div className="absolute inset-0 opacity-5 theme-gradient-bg -z-10" />
 
           {/* Messages Area */}
